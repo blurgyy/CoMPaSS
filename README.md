@@ -6,6 +6,7 @@ Gaoyang Zhang<sup>1,2</sup>, Bingtao Fu<sup>2</sup>, [Qingnan Fan](https://fqnch
 <sup>2</sup> vivo Mobile Communication Co. Ltd  
 <sup>✉</sup> Corresponding author
 
+[[Project page](https://compass.blurgy.xyz)]
 [[arXiv](https://arxiv.org/abs/2412.13195)]
 
 ## Abstract
