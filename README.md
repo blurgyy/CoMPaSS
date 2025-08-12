@@ -1,44 +1,90 @@
 # CoMPaSS: Enhancing Spatial Understanding in Text-to-Image Diffusion Models
 
-Gaoyang Zhang<sup>1,2</sup>, Bingtao Fu<sup>2</sup>, [Qingnan Fan](https://fqnchina.github.io)<sup>2</sup>, [Qi Zhang](https://qzhang-cv.github.io)<sup>2</sup>, Runxing Liu<sup>2</sup>, Hong Gu<sup>2</sup>, Huaqi Zhang<sup>2</sup>, Xinguo Liu<sup>1,✉</sup>
+**\[[Project Page]\]
+\[[arXiv]\]**
 
-<sup>1</sup> State Key Laboratory of CAD&CG, Zhejiang University  
-<sup>2</sup> vivo Mobile Communication Co. Ltd  
-<sup>✉</sup> Corresponding author
+> [Gaoyang Zhang], Bingtao Fu, [Qingnan Fan], [Qi Zhang], Runxing Liu, Hong Gu, Huaqi Zhang, Xinguo Liu  
+> ICCV 2025
 
-[[Project page](https://compass.blurgy.xyz)]
-[[arXiv](https://arxiv.org/abs/2412.13195)]
+## TL; DR
 
-## Abstract
+CoMPaSS enhances the spatial understanding of existing text-to-image diffusion models, enabling
+them to generate images that faithfully reflect spatial configurations specified in the
+text prompt.
 
-Text-to-image diffusion models excel at generating photorealistic images, but commonly struggle to
-render accurate spatial relationships described in text prompts.  We identify two core issues
-underlying this common failure:  1) the ambiguous nature of spatial-related data in existing
-datasets, and 2) the inability of current text encoders to accurately interpret the spatial
-semantics of input descriptions.
-We address these issues with CoMPaSS, a versatile training framework that enhances spatial
-understanding of any T2I diffusion model.
-CoMPaSS solves the ambiguity of spatial-related data with the **S**patial
-**C**onstraints-**O**riented **P**airing (SCOP) data engine, which curates spatially-accurate
-training data through a set of principled spatial constraints.
-To better exploit the curated high-quality spatial priors, CoMPaSS further introduces a **T**oken
-**EN**coding **OR**dering (TENOR) module to allow better exploitation of high-quality spatial priors,
-effectively compensating for the shortcoming of text encoders.
-Extensive experiments on four popular open-weight T2I diffusion models covering both UNet- and
-MMDiT-based architectures demonstrate the effectiveness of CoMPaSS by setting new state-of-the-arts
-with substantial relative gains across well-known benchmarks on spatial relationships generation,
-including
-[VISOR](https://github.com/microsoft/VISOR) (_+98%_),
-[T2I-CompBench Spatial](https://github.com/Karine-Huang/T2I-CompBench) (_+67%_), and
-[GenEval Position](https://github.com/djghosh13/geneval) (_+131%_).
+![teaser](./assets/teaser.avif)
+
+## Setting up Environment
+
+We manage our python environment with [uv], and provide a convenient script for setting
+up the environment at [setup_env.sh](./setup_env.sh).
+Running this script will create a subdirectory `.venv/` in the project root.  To enable
+it, run `source .venv/bin/activate` after the environment is set up:
+
+```bash
+# install requirements into .venv/
+bash ./setup_env.sh
+
+# activate the environment
+source .venv/bin/activate
+```
+
+## Trying out CoMPaSS
+
+> [!NOTE]
+> For training, SCOP and TENOR are both required.  
+> For generating images from text, only TENOR and the reference weights are needed.
+
+### Reference Weights
+
+We provide the reference weights used to report all metrics in our paper on Hugging
+Face 🤗.
+We recommend trying out the FLUX.1-dev weights as it is a Rank-16 LoRA which is only
+50MB in size.
+
+| Model | Link |
+|:-----:|:-----:|
+| FLUX.1-dev | <https://huggingface.co/blurgy/CoMPaSS-FLUX.1> |
+| SD1.4 | <https://huggingface.co/blurgy/CoMPaSS-SD1.4> |
+| SD1.5 | <https://huggingface.co/blurgy/CoMPaSS-SD1.5> |
+| SD2.1 | <https://huggingface.co/blurgy/CoMPaSS-SD2.1> |
+
+### The SCOP dataset
+
+We provide full instructions for replicating the SCOP dataset (28,028 object pairs among
+15,426 images) in the [SCOP](./SCOP) directory.  Check out its [README](./SCOP/README.md)
+to get started.
+
+### The TENOR Module
+
+We provide both training and inference instructions for using our TENOR module in the
+[TENOR](./TENOR) directory.
+MMDiT-based models (e.g., FLUX.1-dev) and UNet-based models (e.g., SD1.5) are both
+supported.  Check out their respective instructions to get started:
+- [Instructions for FLUX.1-dev](./TENOR/flux/README.md)
+- [Instructions for SD1.4, SD1.5, and SD2.1](./TENOR/sd/README.md)
 
 ## Citation
 
 ```bibtex
-@article{zhang2024compass,
+@inproceedings{zhang2025compass,
   title={CoMPaSS: Enhancing Spatial Understanding in Text-to-Image Diffusion Models},
   author={Zhang, Gaoyang and Fu, Bingtao and Fan, Qingnan and Zhang, Qi and Liu, Runxing and Gu, Hong and Zhang, Huaqi and Liu, Xinguo},
-  journal={arXiv preprint arXiv:2412.13195},
-  year={2024}
+  booktitle={ICCV},
+  year={2025}
 }
 ```
+
+[Gaoyang Zhang]: <https://github.com/blurgyy>
+[Qingnan Fan]: <https://fqnchina.github.io>
+[Qi Zhang]: <https://qzhang-cv.github.io>
+
+[Project Page]: <https://compass.blurgy.xyz>
+[arXiv]: <https://arxiv.org/abs/2412.13195>
+
+[uv]: <https://github.com/astral-sh/uv>
+
+[TokenCompose]: <https://github.com/mlpc-ucsd/TokenCompose>
+[x-flux]: <https://github.com/XLabs-AI/x-flux>
+
+<!-- vim: set ts=2 sts=2 sw=2 et: -->

@@ -1,0 +1,11 @@
+data
+*.jpg
+*.png
+*.json
+*.jsonl
+
+/.venv
+
+*.pth
+*.db
+*.txt

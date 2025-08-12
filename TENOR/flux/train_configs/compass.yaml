@@ -1,0 +1,42 @@
+model_name: "flux-dev"
+use_tenor: True
+data_config:
+  root: "set/path/to/scop/here"  # TODO: update this
+  train_batch_size: 1
+  num_workers: 4
+  img_size: 512
+  prompt_dropout: 0.1
+report_to: tensorboard
+train_batch_size: 1
+output_dir: lora/compass  # TODO: update this
+max_train_steps: 24005
+learning_rate: 1e-5
+lr_scheduler: constant
+lr_warmup_steps: 10
+adam_beta1: 0.9
+adam_beta2: 0.999
+adam_weight_decay: 0.01
+adam_epsilon: 1e-8
+max_grad_norm: 1.0
+logging_dir: logs
+mixed_precision: "bf16"
+checkpointing_steps: 2000
+# checkpointing_steps: 1
+checkpoints_total_limit: 999999999
+tracker_project_name: compass
+# resume_from_checkpoint: latest
+resume_from_checkpoint: False
+gradient_accumulation_steps: 2
+rank: 16
+single_blocks: "1,2,3,4"
+double_blocks: null # uses all double blocks
+disable_sampling: false
+sample_every: 2500 # sample every this many steps
+# sample_every: 1 # sample every this many steps
+sample_width: 512
+sample_height: 512
+sample_steps: 50
+sample_prompts:
+    - "a photo of an elephant below a skateboard"
+    - "a photo of a wine glass above a kite"
+    - "a photo of a cow right of a laptop"
