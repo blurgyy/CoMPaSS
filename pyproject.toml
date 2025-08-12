@@ -1,0 +1,75 @@
+[project]
+name = "CoMPaSS"
+version = "0.1.0"
+description = "Enhancing spatial understanding in text-to-Image diffusion models"
+readme = "README.md"
+requires-python = ">=3.12, <3.13"
+dependencies = [
+  "accelerate>=1.4.0",
+  "clip-benchmark>=1.6.1",
+  "cmaes>=0.11.1",
+  "dacite>=1.9.2",
+  "datasets>=3.3.2",
+  "diffusers>=0.32.2",
+  "einops>=0.8.1",
+  "inflect>=7.5.0",
+  "ipdb>=0.13.13",
+  "ipython>=9.0.0",
+  "mmcv-full",
+  "mmdet",
+  "mmengine",
+  "ninja>=1.11.1.3",
+  "omegaconf>=2.3.0",
+  "open-clip-torch==2.26.1",
+  "optuna>=4.2.1",
+  "optuna-dashboard>=0.17.0",
+  "optunahub>=0.2.0",
+  "orjson>=3.10.15",
+  "platformdirs>=4.3.6",
+  "positional-encodings>=6.0.4",
+  "sam-2",
+  "scipy>=1.15.2",
+  "sentencepiece>=0.2.0",
+  "tensorboard>=2.19.0",
+  "tomli>=2.2.1",
+  "torch>=2.6.0",
+  "torchvision>=0.21.0",
+  "transformers>=4.49.0",
+  "uv>=0.6.3",
+]
+
+[tool.pyright]
+include = ["SCOP", "TENOR", "3rdparty"]
+reportExplicitAny = false
+reportAny = false
+reportMissingTypeArgument = false
+reportMissingParameterType = false
+reportUnknownArgumentType = false
+reportUnknownLambdaType = false
+reportUnknownMemberType = false
+reportUnknownParameterType = false
+reportUnknownVariableType = false
+reportUnusedCallResult = false
+reportArgumentType = "information"
+reportMissingTypeStubs = "information"
+reportUntypedFunctionDecorator = "information"
+reportAttributeAccessIssue = false
+reportPossiblyUnboundVariable = "information"
+reportUnusedVariable = "information"
+reportUninitializedInstanceVariable = "warning"
+reportCallIssue = false
+reportOptionalMemberAccess = false
+reportOptionalOperand = false
+reportAssignmentType = false
+
+[tool.uv.sources]
+torch = { index = "pytorch" }
+torchvision = { index = "pytorch" }
+sam-2 = { git = "https://github.com/facebookresearch/sam2.git" }
+mmengine = { git = "https://github.com/open-mmlab/mmengine", rev = "v0.10.6" }
+mmdet = { git = "https://github.com/open-mmlab/mmdetection", rev = "2.x" }
+mmcv-full = { git = "https://github.com/open-mmlab/mmcv", rev = "v1.7.2" }
+
+[[tool.uv.index]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cu124"
